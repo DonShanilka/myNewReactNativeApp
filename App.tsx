@@ -1,23 +1,40 @@
-
-import React from 'react';
+import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
-import {SafeAreaView, StyleSheet, TextInput} from 'react-native';
-
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {TextInput} from 'react-native-paper';
+import {Button} from 'react-native-paper';
 
 function App(): React.JSX.Element {
-
-  const [text, onChangeText] = React.useState('Useless Text');
   const [number, onChangeNumber] = React.useState('');
+  const [text, setText] = React.useState('');
+
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: '#ffffff', height: '200%'}}>
       <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
+        onChangeText={text => setName(text)}
+        mode="outlined"
+        label="Name input"
+        placeholder="Type something"
+        right={<TextInput.Affix text="/100" />}
       />
+
+      <TextInput
+        onChangeText={text => setAge(text)}
+        mode="outlined"
+        label="Age input"
+        placeholder="Type something"
+        right={<TextInput.Affix text="/100" />}
+      />
+
+      <Button
+        icon="camera"
+        mode="contained"
+        onPress={() => console.log('Pressed')}>
+        Press me
+      </Button>
     </SafeAreaView>
   );
 }
