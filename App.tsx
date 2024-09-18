@@ -11,6 +11,8 @@ function App(): React.JSX.Element {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
 
+  const [data, setData] = useState([]);
+
   const saveData = () => {
     fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
@@ -23,9 +25,15 @@ function App(): React.JSX.Element {
         'Content-type': 'application/json; charset=UTF-8',
       },
     })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
-  }
+      .then(response => response.json())
+      .then(json => console.log(json));
+  };
+
+  // const getAllData = () => {
+  //   fetch('https://jsonplaceholder.typicode.com/posts/1')
+  //     .then(response => response.json())
+  //     .then(json => console.log(json));
+  // };
 
   return (
     <SafeAreaView style={{backgroundColor: '#ffffff', height: '200%'}}>
@@ -45,10 +53,7 @@ function App(): React.JSX.Element {
         right={<TextInput.Affix text="/100" />}
       />
 
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={saveData}>
+      <Button icon="camera" mode="contained" onPress={saveData}>
         Press me
       </Button>
     </SafeAreaView>
