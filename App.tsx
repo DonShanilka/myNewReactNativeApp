@@ -11,6 +11,22 @@ function App(): React.JSX.Element {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
 
+  const saveData = () => {
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: name,
+        body: age,
+        userId: 1,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+  }
+
   return (
     <SafeAreaView style={{backgroundColor: '#ffffff', height: '200%'}}>
       <TextInput
@@ -32,7 +48,7 @@ function App(): React.JSX.Element {
       <Button
         icon="camera"
         mode="contained"
-        onPress={() => console.log('Pressed')}>
+        onPress={saveData}>
         Press me
       </Button>
     </SafeAreaView>
